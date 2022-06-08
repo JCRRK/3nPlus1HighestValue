@@ -25,14 +25,24 @@ namespace _3x_1Form
 
         private void button2_Click(object sender, EventArgs e)
         {
-            long start;
-            long result = 0;
             long low = Convert.ToInt64(textBoxLow.Text);
             long high = Convert.ToInt64(textBoxHigh.Text);
-            result = low;
+            long starting = low;
+            long result = 0;
+            long temp;
             for (long i = low; i <= high; i++)
             { 
-                calculate(i);
+                temp = calculate(i);
+                if (temp > result)
+                {
+                    result = temp;
+                    starting = i;
+                }
+                string res1 = result.ToString();
+                string res2 = starting.ToString();
+                string final = res1 + ", x = " + res2;
+                labelResult.Text = final;
+
 
             }
 
@@ -50,7 +60,7 @@ namespace _3x_1Form
         }
         static long calculate(long x)
         {
-            long highest = 0;
+            long highest = x;
             do
             {
                 if (x % 2 != 0) x = x * 3 + 1;
